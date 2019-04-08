@@ -4,7 +4,7 @@ python:
 
 
 install:
-    - pip install --user travis-sphinx
+    - pip install travis-sphinx
 
 script:
     - travis-sphinx build --source=docs build
