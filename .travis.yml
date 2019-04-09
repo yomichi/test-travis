@@ -32,9 +32,9 @@ install:
 script:
     - ctest -V
     # This is a pull request, finish.
-    # - ["$TRAVIS_PULL_REQUEST" != "false" ] && travis_terminate 0
+    - [ "$TRAVIS_PULL_REQUEST" != "false" ] && travis_terminate 0
     # This is neither master nor tag, finish.
-    # - (["$TRAVIS_BRANCH" != "master" ] && [ -z "$TRAVIS_TAG" ] ) && travis_terminate 0
+    - ( [ "$TRAVIS_BRANCH" != "master" ] && [ -z "$TRAVIS_TAG" ] ) && travis_terminate 0
     - cd $ROOTDIR
     - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
     - git fetch # --unshallow
