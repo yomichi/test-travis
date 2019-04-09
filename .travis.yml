@@ -12,8 +12,8 @@ before_install:
 
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
-    - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
-    - conda install sphinx
+    - sudo apt-get install -y --no-install-recommends texlive-full
+    - conda install --yes sphinx
 
 install:
     - mkdir build
