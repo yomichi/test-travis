@@ -32,4 +32,4 @@ script:
     - cd ${ROOTDIR}
 
 after_success:
-    - /usr/bash -x CI_scripts/deploy_docs.sh
+    - /bin/bash -x CI_scripts/deploy_docs.sh
