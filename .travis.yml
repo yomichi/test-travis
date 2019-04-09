@@ -44,7 +44,7 @@ script:
     - cp -r build/doc/en/html/* docs/master/en
     # - cp -r build/doc/en/pdf/test_travis.pdf docs/master/en
     - git add docs/master
-    - if git commit -m "Update by TravisCI" ; then
+    - if (git commit -m "Update by TravisCI") ; then
         git push "https://${GH_TOKEN}@github.com/yomichi/test-travis.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
       else
         true
