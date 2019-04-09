@@ -1,12 +1,13 @@
-language: c
+os:
+    - linux
+
+language: generic
 
 before_install:
-    # From github.com/Syntaf/travis-sphinx/README.md
-    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-    - chmod +x miniconda.sh
-    - "./miniconda.sh -b"
-    - export PATH=/home/travis/miniconda2/bin:$PATH
-    - conda update --yes conda
+    - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    - sh ./miniconda.sh -b
+    - export PATH=/home/travis/miniconda3/bin:$PATH
+    - conda update -y conda
     - sudo rm -rf /dev/shm
     - sudo ln -s /run/shm /dev/shm
 
