@@ -9,6 +9,8 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch # --unshallow
 git checkout gh-pages
 DOCDIR=docs/${TRAVIS_BRANCH}
+mkdir -p ${DOCDIR}
+rm -rf ${DOCDIR}
 mkdir -p ${DOCDIR}/jp/
 mkdir -p ${DOCDIR}/en/
 cp -r build/doc/jp/html/* ${DOCDIR}/jp
