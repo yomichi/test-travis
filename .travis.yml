@@ -10,14 +10,14 @@ before_install:
     - sh ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
     - conda update -y conda
-    - sudo rm -rf /dev/shm
-    - sudo ln -s /run/shm /dev/shm
 
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
     - sudo apt-get install -y --no-install-recommends texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
     - kanji-config-updmap-sys ipaex
     - conda install --yes sphinx
+    
+    - ROOTDIR=`pwd`
 
 install:
     - mkdir build
@@ -27,4 +27,17 @@ install:
 
 script:
     - ctest -V
+    - cd $ROOTDIR
+    - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+    - git fetch --unshallow
+    - git checkout gh-pages
+    - mkdir -p docs/master/jp/
+    - mkdir -p docs/master/en/
+    - cp -r build/doc/jp/html/* docs/master/jp
+    - cp -r build/doc/jp/pdf/test_travis.pdf docs/master/jp
+    - cp -r build/doc/en/html/* docs/master/en
+    - cp -r build/doc/en/pdf/test_travis.pdf docs/master/en
+    - git add docs/master
+    - git commit -m "Update by TravisCI"
+    - git push "https://${GH_TOKEN}@github.com/yomichi/test-travis.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
 
