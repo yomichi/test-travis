@@ -1,13 +1,26 @@
-language: python
-python:
-    - "3.6"
+language: c
 
+before_install:
+    # From github.com/Syntaf/travis-sphinx/README.md
+    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - "./miniconda.sh -b"
+    - export PATH=/home/travis/miniconda2/bin:$PATH
+    - conda update --yes conda
+    - sudo rm -rf /dev/shm
+    - sudo ln -s /run/shm /dev/shm
+
+    - sudo apt-get update
+    - sudo apt-get install -y gcc cmake
+    - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
+    - conda install sphinx
 
 install:
-    - pip install travis-sphinx
+    - mkdir build
+    - cd build
+    - cmake ../
+    - VERBOSE=1 make
 
 script:
-    - travis-sphinx build
+    - ctest -V
 
-after_success:
-    - travis-sphinx deploy
