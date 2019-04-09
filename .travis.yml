@@ -14,14 +14,12 @@ before_install:
     - sh ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
     - conda update -y conda
-
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
     # - sudo apt-get install -y --no-install-recommends texlive-full
     # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
     # - kanji-config-updmap-sys ipaex
     - conda install --yes sphinx
-    
     - ROOTDIR=`pwd`
 
 install:
@@ -34,24 +32,23 @@ install:
 
 script:
     - ctest -V
-
     ## This is a pull request, finish.
     - ["$TRAVIS_PULL_REQUEST" != "false"] && travis_terminate 0
-
-    ## This is some branch, finish.
+    ## This is neither master nor tag, finish.
     - (["$TRAVIS_BRANCH" != "master"] && [ -z "$TRAVIS_TAG" ] ) && travis_terminate 0
 
     - cd $ROOTDIR
     - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
     - git fetch # --unshallow
     - git checkout gh-pages
-    - mkdir -p docs/master/jp/
-    - mkdir -p docs/master/en/
-    - cp -r build/doc/jp/html/* docs/master/jp
-    # - cp -r build/doc/jp/pdf/test_travis.pdf docs/master/jp
-    - cp -r build/doc/en/html/* docs/master/en
-    # - cp -r build/doc/en/pdf/test_travis.pdf docs/master/en
-    - git add docs/master
+    - DOCDIR=docs/${TRAVIS_BRANCH}
+    - mkdir -p ${DOCDIR}/jp/
+    - mkdir -p ${DOCDIR}/en/
+    - cp -r build/doc/jp/html/* ${DOCDIR}/jp
+    # - cp -r build/doc/jp/pdf/test_travis.pdf ${DOCDIR}/jp
+    - cp -r build/doc/en/html/* ${DOCDIR}/en
+    # - cp -r build/doc/en/pdf/test_travis.pdf ${DOCDIR}/en
+    - git add ${DOCDIR}
     - |
       if (git commit -m "Update by TravisCI"); then
         git push "https://${GH_TOKEN}@github.com/yomichi/test-travis.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
