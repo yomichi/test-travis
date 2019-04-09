@@ -9,6 +9,7 @@ dist: xenial
 language: generic
 
 before_install:
+    - set -e
     - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - sh ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
@@ -34,7 +35,7 @@ script:
     - ctest -V
     - cd $ROOTDIR
     - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-    - git fetch --unshallow
+    - git fetch # --unshallow
     - git checkout gh-pages
     - mkdir -p docs/master/jp/
     - mkdir -p docs/master/en/
