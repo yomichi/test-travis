@@ -21,6 +21,7 @@ project = 'test-travis-sphinx'
 copyright = '2019, yomichi'
 author = 'yomichi'
 
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
