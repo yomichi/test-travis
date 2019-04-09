@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'test-travis-sphinx'
+project = 'test_travis'
 copyright = '2019, yomichi'
 author = 'yomichi'
 
