@@ -8,7 +8,7 @@ dist: xenial
 
 language: generic
 
-before_install:
+install:
     - set -e
     - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - sh ./miniconda.sh -b
@@ -22,38 +22,14 @@ before_install:
     - conda install --yes sphinx
     - ROOTDIR=`pwd`
 
-install:
+script:
     - mkdir build
     - cd build
     - cmake ../
     # - VERBOSE=1 make
     - VERBOSE=1 make hello doc-jp-html doc-en-html
-
-script:
     - ctest -V
-    - echo $TRAVIS_BRANCH
-    - echo $TRAVIS_PULL_REQUEST
-    - echo $TRAVIS_TAG
-    # This is a pull request, finish.
-    - ( [ "_$TRAVIS_PULL_REQUEST" != "_false" ] ) && travis_terminate 0
-    # This is neither master nor tag, finish.
-    - ( [ "_$TRAVIS_BRANCH" != "_master" ] && [ -z "$TRAVIS_TAG" ] ) && travis_terminate 0
     - cd $ROOTDIR
-    - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-    - git fetch # --unshallow
-    - git checkout gh-pages
-    - DOCDIR=docs/${TRAVIS_BRANCH}
-    - mkdir -p ${DOCDIR}/jp/
-    - mkdir -p ${DOCDIR}/en/
-    - cp -r build/doc/jp/html/* ${DOCDIR}/jp
-    # - cp -r build/doc/jp/pdf/test_travis.pdf ${DOCDIR}/jp
-    - cp -r build/doc/en/html/* ${DOCDIR}/en
-    # - cp -r build/doc/en/pdf/test_travis.pdf ${DOCDIR}/en
-    - git add ${DOCDIR}
-    - |
-      if (git commit -m "Update by TravisCI"); then
-        git push "https://${GH_TOKEN}@github.com/yomichi/test-travis.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
-      else
-        true
-      fi
 
+after_success:
+    - CI_scripts/deploy_docs.sh
