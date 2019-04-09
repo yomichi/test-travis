@@ -17,7 +17,7 @@ before_install:
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
     - sudo apt-get install -y --no-install-recommends texlive-full
-      # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
+    # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
     - kanji-config-updmap-sys ipaex
     - conda install --yes sphinx
     
@@ -27,7 +27,8 @@ install:
     - mkdir build
     - cd build
     - cmake ../
-    - VERBOSE=1 make
+    # - VERBOSE=1 make
+    - VERBOSE=1 make hello doc-jp-html doc-en-html
 
 script:
     - ctest -V
@@ -38,9 +39,9 @@ script:
     - mkdir -p docs/master/jp/
     - mkdir -p docs/master/en/
     - cp -r build/doc/jp/html/* docs/master/jp
-    - cp -r build/doc/jp/pdf/test_travis.pdf docs/master/jp
+    # - cp -r build/doc/jp/pdf/test_travis.pdf docs/master/jp
     - cp -r build/doc/en/html/* docs/master/en
-    - cp -r build/doc/en/pdf/test_travis.pdf docs/master/en
+    # - cp -r build/doc/en/pdf/test_travis.pdf docs/master/en
     - git add docs/master
     - git commit -m "Update by TravisCI"
     - git push "https://${GH_TOKEN}@github.com/yomichi/test-travis.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
