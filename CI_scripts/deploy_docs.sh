@@ -5,6 +5,8 @@ if [ "_$TRAVIS_PULL_REQUEST" != "_false" ] ;then travis_terminate 0; fi
 # This is neither master nor tag, finish.
 if [ "_$TRAVIS_BRANCH" != "_master" ] && [ -z "$TRAVIS_TAG" ] ; then travis_terminate 0; fi
 
+false
+
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch # --unshallow
 git checkout gh-pages
