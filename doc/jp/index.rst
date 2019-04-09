@@ -17,7 +17,7 @@ Contents
    :maxdepth: 4
    :numbered: 4
 
-   foo
+   hello
 
 
 Indices and tables

@@ -1,7 +1,7 @@
 # This is a pull request, finish.
-if [ "_$TRAVIS_PULL_REQUEST" != "_false" ] ;then travis_terminate 0; fi
+if [ "_$TRAVIS_PULL_REQUEST" != "_false" ] ;then exit 0; fi
 # This is neither master nor tag, finish.
-if [ "_$TRAVIS_BRANCH" != "_master" ] && [ -z "$TRAVIS_TAG" ] ; then travis_terminate 0; fi
+if [ "_$TRAVIS_BRANCH" != "_master" ] && [ -z "$TRAVIS_TAG" ] ; then exit 0; fi
 
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch # --unshallow
