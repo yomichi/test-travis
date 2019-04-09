@@ -31,6 +31,7 @@ install:
     # - VERBOSE=1 make
     - VERBOSE=1 make hello doc-jp-html doc-en-html
 
+
 script:
     - ctest -V
 
