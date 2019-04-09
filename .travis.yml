@@ -4,7 +4,7 @@ notifications:
 os:
     - linux
 
-dist: xenial
+# dist: xenial
 
 language: generic
 
@@ -29,7 +29,11 @@ script:
     # - VERBOSE=1 make
     - VERBOSE=1 make hello doc-jp-html doc-en-html
     - ctest -V
-    - cd $ROOTDIR
+    - echo ${ROOTDIR}
+    - cd ${ROOTDIR}
+    - pwd
 
 after_success:
-    - CI_scripts/deploy_docs.sh
+    - pwd
+    - ls -al
+    - /bin/bash -x CI_scripts/deploy_docs.sh
