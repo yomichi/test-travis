@@ -1,6 +1,8 @@
 os:
     - linux
 
+dist: xenial
+
 language: generic
 
 before_install:
