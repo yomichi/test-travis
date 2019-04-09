@@ -10,7 +10,7 @@
 - [ ] deploy docs to gh-pages
     - [x] html
     - [ ] pdf
-    - [ ] master only
+    - [x] only master and tag
 - [ ] release tag
     - [ ] make release page
     - [ ] upload tarball archive with compiled document
