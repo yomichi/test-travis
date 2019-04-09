@@ -1,5 +1,3 @@
-#!/bin/bash -x
-
 set -e
 
 # This is a pull request, finish.

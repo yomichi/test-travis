@@ -29,9 +29,7 @@ script:
     # - VERBOSE=1 make
     - VERBOSE=1 make hello doc-jp-html doc-en-html
     - ctest -V
-    - echo $ROOTDIR
-    - echo ${ROOTDIR}
     - cd ${ROOTDIR}
 
 after_success:
-    - CI_scripts/deploy_docs.sh
+    - /usr/bash -x CI_scripts/deploy_docs.sh
