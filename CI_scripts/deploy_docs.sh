@@ -12,9 +12,9 @@ rm -rf ${DOCDIR}
 mkdir -p ${DOCDIR}/jp/
 mkdir -p ${DOCDIR}/en/
 cp -r build/doc/jp/html/* ${DOCDIR}/jp
-# cp -r build/doc/jp/pdf/test_travis.pdf ${DOCDIR}/jp
 cp -r build/doc/en/html/* ${DOCDIR}/en
-# cp -r build/doc/en/pdf/test_travis.pdf ${DOCDIR}/en
+cp -r build/doc/jp/pdf/test_travis.pdf ${DOCDIR}/jp
+cp -r build/doc/en/pdf/test_travis.pdf ${DOCDIR}/en
 git add ${DOCDIR}
 git commit -m "Update by TravisCI"
 ST=$?
