@@ -4,9 +4,9 @@
 
 - [x] build src
 - [x] run test
-- [ ] build docs
+- [x] build docs
     - [x] sphinx-html
-    - [ ] sphinx-latex
+    - [x] sphinx-latex
 - [ ] deploy docs to gh-pages
     - [x] html
     - [ ] pdf

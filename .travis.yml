@@ -4,12 +4,11 @@ notifications:
 os:
     - linux
 
-# dist: xenial
+dist: xenial
 
 language: generic
 
 install:
-    - set -e
     - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - sh ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
@@ -17,17 +16,20 @@ install:
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
     # - sudo apt-get install -y --no-install-recommends texlive-full
-    # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
-    # - kanji-config-updmap-sys ipaex
-    - conda install --yes sphinx
+    - |
+      sudo apt-get install -y texlive-latex-recommended texlive-latex-extra \
+           texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
+    - kanji-config-updmap-sys ipaex
+    - pip install sphinx
     - ROOTDIR=`pwd`
 
 script:
     - mkdir build
     - cd build
     - cmake ../
-    # - VERBOSE=1 make
-    - VERBOSE=1 make hello doc-jp-html doc-en-html
+    - VERBOSE=1 make
+    # - VERBOSE=1 make hello doc-jp-html doc-en-html
+    # - VERBOSE=1 make hello doc-jp-pdf
     - ctest -V
     - cd ${ROOTDIR}
 
