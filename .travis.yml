@@ -15,8 +15,10 @@ install:
     - conda update -y conda
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
-    - sudo apt-get install -y --no-install-recommends texlive-full
-    # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
+    # - sudo apt-get install -y --no-install-recommends texlive-full
+    - |
+      sudo apt-get install -y --no-install-recommends texlive-latex-recommended texlive-latex-extra \
+           texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
     - kanji-config-updmap-sys ipaex
     - conda install --yes sphinx
     - ROOTDIR=`pwd`
