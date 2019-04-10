@@ -9,15 +9,14 @@ dist: xenial
 language: generic
 
 install:
-    - set -e
     - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - sh ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
     - conda update -y conda
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
-    # - sudo apt-get install -y --no-install-recommends texlive-full
-    - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
+    - sudo apt-get install -y --no-install-recommends texlive-full
+    # - sudo apt-get install -y --no-install-recommends texlive-base texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra
     - kanji-config-updmap-sys ipaex
     - conda install --yes sphinx
     - ROOTDIR=`pwd`
