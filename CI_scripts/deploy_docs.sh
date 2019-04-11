@@ -35,3 +35,4 @@ if [ $ST == 0 ]; then
   git push origin gh-pages:gh-pages --follow-tags > /dev/null 2>&1
 fi
 
+git checkout master
