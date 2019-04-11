@@ -25,9 +25,9 @@ script:
   - ctest -V
   - cd ${ROOTDIR}
 after_success:
-  - "/bin/bash -x CI_scripts/deploy_docs.sh"
+  - /bin/bash -x CI_scripts/deploy_docs.sh
 before_deploy:
-  - "/bin/bash -x CI_scripts/make_tarball.sh"
+  - /bin/bash -x CI_scripts/make_tarball.sh
 deploy:
   provider: releases
   api_key:
