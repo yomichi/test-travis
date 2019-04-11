@@ -8,7 +8,7 @@ if [ "_$TRAVIS_BRANCH" != "_master" ] && [ -z "$TRAVIS_TAG" ] ; then exit 0; fi
 ## TODO
 git config --global user.email "yomichi@tsg.jp"
 git config --global user.name "Yuichi Motoyama"
-openssl aes-256-cbc -K $encrypted_12106f7bbd8a_key -iv $encrypted_12106f7bbd8a_iv -in ssh_key.enc -out ~/.ssh/id_rsa -d
+openssl aes-256-cbc -K $encrypted_12106f7bbd8a_key -iv $encrypted_12106f7bbd8a_iv -in .travis/ssh_key.enc -out ~/.ssh/id_rsa -d
 
 chmod 600 ~/.ssh/id_rsa
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
