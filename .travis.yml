@@ -1,35 +1,39 @@
 notifications:
-    email: false
-
+  email: false
 os:
-    - linux
-
+- linux
 dist: xenial
-
 language: generic
-
 install:
-    - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - sh ./miniconda.sh -b
-    - export PATH=/home/travis/miniconda3/bin:$PATH
-    - conda update -y conda
-    - sudo apt-get update
-    - sudo apt-get install -y gcc cmake
-    - |
-      sudo apt-get install -y texlive-latex-recommended texlive-latex-extra \
-           texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
-    - kanji-config-updmap-sys ipaex
-    - pip install sphinx
-    - ROOTDIR=`pwd`
-
+- export ROOTDIR=`pwd`
+- wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+- sh ./miniconda.sh -b
+- export PATH=/home/travis/miniconda3/bin:$PATH
+- conda update -y conda
+- sudo apt-get update
+- sudo apt-get install -y gcc cmake wget
+- |
+  sudo apt-get install -y texlive-latex-recommended texlive-latex-extra \
+       texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
+- kanji-config-updmap-sys ipaex
+- pip install sphinx
 script:
-    - mkdir build
-    - cd build
-    - cmake ../
-    - VERBOSE=1 make
-    - ctest -V
-    - cd ${ROOTDIR}
-
+- mkdir build
+- cd build
+- cmake ../
+- VERBOSE=1 make
+- ctest -V
+- cd ${ROOTDIR}
 after_success:
-    - /bin/bash -x CI_scripts/deploy_docs.sh
-
+- "/bin/bash -x CI_scripts/deploy_docs.sh"
+before_deploy:
+- "/bin/bash -x CI_scripts/make_tarball.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: HWrv01IaN6L73qtaoT9LWHqSc+llONLVgJydaybf3i0mhGF822uz10aSUQ3WkxIDpq/DkrmnSmJ90vd2d7qb1ftkx+v8P+CaxPe6ZcAolSe7ZkQp/R4u75zhLxiEidDbLZz0VTZOQI3bSIMNWw1rVoIu4X+5N1AUdoL9aHcT50Cyo1Nl0Napird78abWor+eI7O0uJoYOABtlf32sc44fRQHIEJs14u8I9vR3yKhiCSlfv3sw3m/aJwDB9M+TSdc8GM8SRF+cUg4k9AdH4YVF5NAafv7RUenarXOE1mboMW68MO8Ck1jpgJoDyrHLau5lm1euEo/7bO93oaqNaJb74H/j8V1qCVq7GMkej31ToOmhGiyVE3Sttcl1ZF6yqONUSrquAbrfTuJoEH7M0xCpD2+um0JEFpgLQnSdBPJRf4m+Vym8V3YLIKplWuPzzpG+WcaZWtb2foELx0I0Em8ofNkjv4DCXOrrbX27WFTfjl+JwfegExOKWqFLBI+sTC4jKl3KHHHW22Vx/P5cmK5yk+jnYgGoy1dL41SZqJ3H4OcOqBBIJv2fvWNj5VePFw8K5xmUfLlBgmNu+zA3UkCoHVcOmJje3RsNdEThgH4ZXgKNCxEldi26U5MHbh13Ny2SO73pDNEZO/2/AbUTgv+oUdryPITiKjfQ4l9Zp4JgrA=
+  file: *.tar.gz
+  skip_cleanup: true
+  on:
+    repo: yomichi/test-travis
+    tags: true

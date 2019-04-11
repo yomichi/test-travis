@@ -12,7 +12,7 @@ openssl aes-256-cbc -K $encrypted_12106f7bbd8a_key -iv $encrypted_12106f7bbd8a_i
 
 chmod 600 ~/.ssh/id_rsa
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-git remote set-url origin git@github.com:$(git config --local remote.origin.url | cut -d/ -f4-5)
+git remote set-url origin git@github.com:${TRAVIS_REPO_SLUG}
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch --unshallow origin
 git checkout gh-pages
@@ -29,7 +29,7 @@ cp -r build/doc/en/html/* ${DOCDIR}/en
 cp -r build/doc/jp/pdf/test_travis.pdf ${DOCDIR}/jp
 cp -r build/doc/en/pdf/test_travis.pdf ${DOCDIR}/en
 git add ${DOCDIR}
-git commit -m "Update by TravisCI"
+git commit -m "Update by TravisCI (${TRAVIS_BUILD_ID})"
 ST=$?
 if [ $ST == 0 ]; then
   git push origin gh-pages:gh-pages --follow-tags > /dev/null 2>&1
