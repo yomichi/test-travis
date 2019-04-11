@@ -7,11 +7,12 @@
 - [x] build docs
     - [x] sphinx-html
     - [x] sphinx-latex
-- [ ] deploy docs to gh-pages
+- [x] deploy docs to gh-pages
     - [x] html
-    - [ ] pdf
+    - [x] pdf
     - [x] only master and tag
 - [ ] release tag
     - [ ] make release page
     - [ ] upload tarball archive with compiled document
     - [ ] deploy tagged docs to gh-pages
+    - [ ] update index.html
