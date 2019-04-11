@@ -12,7 +12,7 @@
     - [x] pdf
     - [x] only master and tag
 - [ ] release tag
-    - [ ] make release page
-    - [ ] upload tarball archive with compiled document
-    - [ ] deploy tagged docs to gh-pages
+    - [x] make release page
+    - [x] upload tarball archive with compiled document
+    - [x] deploy tagged docs to gh-pages
     - [ ] update index.html
