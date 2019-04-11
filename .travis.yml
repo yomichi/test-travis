@@ -15,7 +15,6 @@ install:
     - conda update -y conda
     - sudo apt-get update
     - sudo apt-get install -y gcc cmake
-    # - sudo apt-get install -y --no-install-recommends texlive-full
     - |
       sudo apt-get install -y texlive-latex-recommended texlive-latex-extra \
            texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
@@ -28,10 +27,9 @@ script:
     - cd build
     - cmake ../
     - VERBOSE=1 make
-    # - VERBOSE=1 make hello doc-jp-html doc-en-html
-    # - VERBOSE=1 make hello doc-jp-pdf
     - ctest -V
     - cd ${ROOTDIR}
 
 after_success:
     - /bin/bash -x CI_scripts/deploy_docs.sh
+
