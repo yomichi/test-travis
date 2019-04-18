@@ -6,17 +6,13 @@ dist: xenial
 language: generic
 install:
   - export ROOTDIR=`pwd`
-  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - sh ./miniconda.sh -b
-  - export PATH=/home/travis/miniconda3/bin:$PATH
-  - conda update -y conda
   - sudo apt-get update
   - sudo apt-get install -y gcc cmake wget
   - |
     sudo apt-get install -y texlive-latex-recommended texlive-latex-extra \
          texlive-lang-japanese texlive-fonts-recommended texlive-fonts-extra latexmk
   - kanji-config-updmap-sys ipaex
-  - pip install sphinx
+  - pyenv global 3.7
 script:
   - mkdir build
   - cd build
